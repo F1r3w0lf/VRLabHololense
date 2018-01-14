@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 662155249}
   - component: {fileID: 662155248}
+  - component: {fileID: 662155250}
   m_Layer: 0
   m_Name: Spielfeld
   m_TagString: Untagged
@@ -149,6 +150,7 @@ MonoBehaviour:
   - {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
   - {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
   - {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
+  isBlaueRunde: 1
 --- !u!4 &662155249
 Transform:
   m_ObjectHideFlags: 0
@@ -163,6 +165,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &662155250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 662155247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee82771420aa06345b29808ad8267a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightPrefab: {fileID: 1120401303215926, guid: 013b4a8cbb7ae4d4eb58b91ae157fe8f,
+    type: 2}
 --- !u!1 &789056717
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,15 +218,15 @@ Camera:
   m_GameObject: {fileID: 789056717}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.85
   far clip plane: 1000
   field of view: 60
   orthographic: 0
