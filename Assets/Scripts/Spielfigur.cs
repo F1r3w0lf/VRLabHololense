@@ -15,8 +15,8 @@ public abstract class Spielfigur : MonoBehaviour
         CurrentY = y;
     }
 
-    public virtual bool erlaubterZug(int x, int y)
+    public virtual bool[,] erlaubterZug()
     {
-        return true;
+        return new bool[8,8];
     }
 }

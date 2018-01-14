@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpielfeldManager : MonoBehaviour {
 
+    public static SpielfeldManager Instance { set; get; }
+    private bool [,] allowedMoves { set; get; }
+
     public Spielfigur[,] Spielfigur { set; get; }
     private Spielfigur SelectedSpielfigur;
 
@@ -22,6 +25,7 @@ public class SpielfeldManager : MonoBehaviour {
 
     private void Start()
     {
+        Instance = this;
         SpawnAllSpielfiguren();
     }
 
@@ -54,18 +58,39 @@ public class SpielfeldManager : MonoBehaviour {
         if(Spielfigur[x,y].isBlue!= isBlaueRunde)
             return;
 
+        allowedMoves = Spielfigur[x, y].erlaubterZug();
+
         SelectedSpielfigur = Spielfigur[x, y];
+        BoardHighlights.Instance.HighlightAllowedMoves(allowedMoves);
     }
 
     private void moveSpeilfigur(int x, int y )
     {
-        if (SelectedSpielfigur.erlaubterZug(x, y))
+        if (allowedMoves[x,y])
         {
+            Spielfigur c = Spielfigur[x, y];
+
+            if(c != null && c.isBlue != isBlaueRunde)
+            {
+                //Wenn Held stirbt, ist das Spiel vorbei
+                if(c.GetType ()== typeof(Hero))
+                {
+                    //Spiel zuende
+                    return;
+                }
+
+                activeSpielfigur.Remove(c.gameObject);
+                Destroy(c.gameObject);
+            }
+
             Spielfigur[SelectedSpielfigur.CurrentX, SelectedSpielfigur.CurrentY] = null;
             SelectedSpielfigur.transform.position = GetTileCenter(x, y);
+            SelectedSpielfigur.setPosition(x, y);
             Spielfigur[x, y] = SelectedSpielfigur;
             isBlaueRunde = !isBlaueRunde;
         }
+
+        BoardHighlights.Instance.HideHighlights();
 
         SelectedSpielfigur = null;
     }
