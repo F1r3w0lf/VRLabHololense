@@ -19,7 +19,8 @@ public class SpielfeldManager : MonoBehaviour {
     public List<GameObject> SpielfigurPrefab;
     private List<GameObject> activeSpielfigur = new List<GameObject> ();
 
-    private Quaternion orientation = Quaternion.Euler(0, 180, 0);
+    private Quaternion orientationBlue = Quaternion.Euler(0, 0, 0);
+    private Quaternion orientationRed = Quaternion.Euler(0, 180, 0);
 
     public bool isBlaueRunde = true;
 
@@ -114,9 +115,18 @@ public class SpielfeldManager : MonoBehaviour {
 			
     }
 
-    private void SpawnSpielfigur(int index, int x, int y)
+    private void SpawnSpielfigurBlue(int index, int x, int y)
     {
-        GameObject go = Instantiate(SpielfigurPrefab[index], GetTileCenter(x,y), orientation) as GameObject;
+        GameObject go = Instantiate(SpielfigurPrefab[index], GetTileCenter(x,y), orientationBlue) as GameObject;
+        go.transform.SetParent(transform);
+        Spielfigur[x, y] = go.GetComponent<Spielfigur>();
+        Spielfigur[x, y].setPosition(x, y);
+        activeSpielfigur.Add(go);
+    }
+
+    private void SpawnSpielfigurRed(int index, int x, int y)
+    {
+        GameObject go = Instantiate(SpielfigurPrefab[index], GetTileCenter(x, y), orientationRed) as GameObject;
         go.transform.SetParent(transform);
         Spielfigur[x, y] = go.GetComponent<Spielfigur>();
         Spielfigur[x, y].setPosition(x, y);
@@ -137,18 +147,20 @@ public class SpielfeldManager : MonoBehaviour {
         Spielfigur = new Spielfigur[8,8];
 
         //Spielfiguren von Team Blau Spawnen
-        SpawnSpielfigur(0, 2, 0);
-        SpawnSpielfigur(1, 3, 0);
-        SpawnSpielfigur(2, 4, 0);
-        SpawnSpielfigur(3, 5, 0);
+        SpawnSpielfigurBlue(0, 2, 0);
+        SpawnSpielfigurBlue(0, 3, 0);
+        SpawnSpielfigurBlue(0, 4, 0);
+        SpawnSpielfigurBlue(0, 5, 0);
+        SpawnSpielfigurBlue(2, 6, 0);
 
 
         //Spielfiguren von Team Rot Spawnen
-       
-        SpawnSpielfigur(4, 2, 7);
-        SpawnSpielfigur(5, 3, 7);
-        SpawnSpielfigur(6, 4, 7);
-        SpawnSpielfigur(7, 5, 7);
+
+        SpawnSpielfigurRed(1, 2, 7);
+        SpawnSpielfigurRed(1, 3, 7);
+        SpawnSpielfigurRed(1, 4, 7);
+        SpawnSpielfigurRed(1, 5, 7);
+        SpawnSpielfigurRed(3, 1, 7);
 
     }
 

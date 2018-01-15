@@ -143,13 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpielfigurPrefab:
   - {fileID: 1374650182584566, guid: 0f7be477366e1624fbe022626f7ade2f, type: 2}
-  - {fileID: 1374650182584566, guid: 0f7be477366e1624fbe022626f7ade2f, type: 2}
-  - {fileID: 1374650182584566, guid: 0f7be477366e1624fbe022626f7ade2f, type: 2}
-  - {fileID: 1374650182584566, guid: 0f7be477366e1624fbe022626f7ade2f, type: 2}
   - {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
-  - {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
-  - {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
-  - {fileID: 100048, guid: 272ec112bddec644a8af6599107e74f7, type: 2}
+  - {fileID: 1594665374657930, guid: 22196f2a736f31c41b38d94a87ddcb94, type: 2}
+  - {fileID: 1237394254072180, guid: 043c2577a19aa754cb648ba4cf0662e5, type: 2}
   isBlaueRunde: 1
 --- !u!4 &662155249
 Transform:
@@ -252,13 +248,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 789056717}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4, y: 10, z: 4}
+  m_LocalRotation: {x: 0.4055798, y: -0.579228, z: 0.4055798, w: 0.579228}
+  m_LocalPosition: {x: 8, y: 11, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 110, y: 90, z: 180}
 --- !u!1 &1562632682
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,8 +345,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1945039148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 4}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: 4, y: -0.1, z: 4}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 662155249}
   m_RootOrder: 0
@@ -361,7 +357,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1945039148}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -369,7 +365,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 26078a8658d2f8240a08767b47a6aa67, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
