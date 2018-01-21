@@ -5,7 +5,7 @@ using UnityEngine;
 public class Soldier : Spielfigur
 {
 
-  
+
 
 
 
@@ -33,7 +33,11 @@ public class Soldier : Spielfigur
             if (c == null)
                 r[x, y] = true;
             else if (isBlue != c.isBlue)
-                r[x, y] = true; } }
+                r[x, y] = true; }
+    }
+
+
+
 }
 		
 	

@@ -5,13 +5,21 @@ using UnityEngine;
 public abstract class Spielfigur : MonoBehaviour
 {
 
+
+
     public int CurrentX { set; get; }
     public int CurrentY { set; get; }
+
+
+
     public bool isBlue;
-    public int health = 5;
-    private int attack = 1;
-    private int defense = 1;
-    private int movement = 2;
+    public int health;
+    public int attack;
+    public int defense;
+    public int movement;
+
+
+
 
     public void setPosition(int x, int y)
     {
@@ -25,4 +33,58 @@ public abstract class Spielfigur : MonoBehaviour
     {
         return new bool[8,8];
     }
+
+
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+
+        set
+        {
+            health = value;
+        }
+    }
+
+    public int Attack
+    {
+        get
+        {
+            return attack;
+        }
+
+        set
+        {
+            attack = value;
+        }
+    }
+
+    public int Defense
+    {
+        get
+        {
+            return defense;
+        }
+
+        set
+        {
+            defense = value;
+        }
+    }
+
+    public int Movement
+    {
+        get
+        {
+            return movement;
+        }
+
+        set
+        {
+            movement = value;
+        }
+    }
+
 }

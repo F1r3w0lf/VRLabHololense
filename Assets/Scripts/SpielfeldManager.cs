@@ -45,28 +45,32 @@ public class SpielfeldManager : MonoBehaviour {
                 }
                 else
                 {
-                    moveSpeilfigur(selectionX, selectionY);
+                    moveSpielfigur(selectionX, selectionY);
                 }
             }
         }
     }
 
+    //Spielfigur für den Zug auswählen
     private void SelectSpielfigur(int x, int y)
     {
+        //Wenn auf dem ausgewählten Feld keine Figur steht, nichts machen
         if (Spielfigur[x, y] == null)
             return;
         
+        //Wenn auf dem ausgewählten Feld eine Figur steht, die aber nicht dran ist, nichts machen
         if(Spielfigur[x,y].isBlue!= isBlaueRunde)
             return;
 
+        //Wenn auf dem ausgewählten Feld eine Figur steht und die dran ist, schauen welche Züge erlaubt sind
         allowedMoves = Spielfigur[x, y].erlaubterZug();
 
-
+        //Die ausgewählte Figur als "SelectedSpielfigur" wählen
         SelectedSpielfigur = Spielfigur[x, y];
         BoardHighlights.Instance.HighlightAllowedMoves(allowedMoves);
     }
 
-    private void moveSpeilfigur(int x, int y )
+    private void moveSpielfigur(int x, int y )
     {
         if (allowedMoves[x,y])
         {
@@ -74,22 +78,19 @@ public class SpielfeldManager : MonoBehaviour {
 
             if(c != null && c.isBlue != isBlaueRunde)
             {
-                //Wenn Held stirbt, ist das Spiel vorbei
-                if(c.GetType ()== typeof(Hero))
-                {
-                    //Spiel zuende
-                    return;
-                }
 
+                kampf(c, SelectedSpielfigur);
 
-                kampf(c);
-
+            } else if(c == null)
+            {
+                Spielfigur[SelectedSpielfigur.CurrentX, SelectedSpielfigur.CurrentY] = null;
+                SelectedSpielfigur.transform.position = GetTileCenter(x, y);
+                SelectedSpielfigur.setPosition(x, y);
+                Spielfigur[x, y] = SelectedSpielfigur;
             }
+           
 
-            Spielfigur[SelectedSpielfigur.CurrentX, SelectedSpielfigur.CurrentY] = null;
-            SelectedSpielfigur.transform.position = GetTileCenter(x, y);
-            SelectedSpielfigur.setPosition(x, y);
-            Spielfigur[x, y] = SelectedSpielfigur;
+
             isBlaueRunde = !isBlaueRunde;
         }
 
@@ -98,16 +99,53 @@ public class SpielfeldManager : MonoBehaviour {
         SelectedSpielfigur = null;
     }
 
-    private void kampf(Spielfigur s)
+    private void kampf(Spielfigur def, Spielfigur att)
     {
-        Debug.Log(s);
-        Debug.Log(activeSpielfigur);
+        Debug.Log(def.GetInstanceID() + ": Leben: " + def.health + " Angriff: " + def.attack + " Verteidigung: " + def.defense);
+        Debug.Log(att.GetInstanceID() + ": Leben: " + att.health + " Angriff: " + att.attack + " Verteidigung: " + att.defense);
+        System.Random rnd= new System.Random();
 
 
-        activeSpielfigur.Remove(s.gameObject);
 
-        //Gegner schlagen
-        Destroy(s.gameObject);
+        int defensive = def.defense; //rnd.Next(1, def.defense);
+
+        Debug.Log("Der Verteidiger würfelt mit einem 1W" + def.defense +" Würfel und bekommt eine: " + defensive);
+
+        int angriff = att.attack; //rnd.Next(1, att.attack);
+
+        Debug.Log("Der Angreifer würfelt mit einem 1W" + att.attack + " Würfel und bekommt eine: " + angriff);
+
+        int ergebnis = defensive - angriff;
+
+          if (ergebnis >= 0)
+        {
+          Debug.Log("Das Ergebnis ist: "+ ergebnis +" somit hat der Verteidiger gewonnen");
+            return;
+        }
+        else
+        {
+          def.health = def.health - Mathf.Abs(ergebnis);
+          Debug.Log("Das Ergebnis ist: " + ergebnis + " somit hat der Angreifer gewonnen gewonnen und der Vertediger verliert: " + ergebnis);
+        }
+
+        if(def.health <= 0)
+        {
+            
+            Debug.Log("Verteidiger ist gestorben");
+            Debug.Log(def.GetInstanceID() + "wird aus dem spielt entfernt");
+            activeSpielfigur.Remove(def.gameObject);
+            Destroy(def.gameObject);
+        }
+        else
+        {
+            Debug.Log("Verteidiger hat noch: " + def.health + " HP");
+            return;
+        }
+
+        
+
+        
+        
     }
 
     private void UpdateSelection()
