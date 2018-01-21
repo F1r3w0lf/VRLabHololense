@@ -61,6 +61,7 @@ public class SpielfeldManager : MonoBehaviour {
 
         allowedMoves = Spielfigur[x, y].erlaubterZug();
 
+
         SelectedSpielfigur = Spielfigur[x, y];
         BoardHighlights.Instance.HighlightAllowedMoves(allowedMoves);
     }
@@ -80,8 +81,9 @@ public class SpielfeldManager : MonoBehaviour {
                     return;
                 }
 
-                activeSpielfigur.Remove(c.gameObject);
-                Destroy(c.gameObject);
+
+                kampf(c);
+
             }
 
             Spielfigur[SelectedSpielfigur.CurrentX, SelectedSpielfigur.CurrentY] = null;
@@ -94,6 +96,18 @@ public class SpielfeldManager : MonoBehaviour {
         BoardHighlights.Instance.HideHighlights();
 
         SelectedSpielfigur = null;
+    }
+
+    private void kampf(Spielfigur s)
+    {
+        Debug.Log(s);
+        Debug.Log(activeSpielfigur);
+
+
+        activeSpielfigur.Remove(s.gameObject);
+
+        //Gegner schlagen
+        Destroy(s.gameObject);
     }
 
     private void UpdateSelection()
@@ -172,22 +186,20 @@ public class SpielfeldManager : MonoBehaviour {
         for (int i = 0; i <= 8; i++)
         {
             Vector3 start = Vector3.forward * i;
-            Debug.DrawLine(start, start + widthLine);
+            //Debug.DrawLine(start, start + widthLine);
             for (int j = 0; j <= 8; j++)
             {
                 start = Vector3.right * j;
-                Debug.DrawLine(start, start + heightLine);
+                //Debug.DrawLine(start, start + heightLine);
             }
         }
 
         //Die Auswahl zeichnen
         if(selectionX>=0 && selectionY>= 0)
         {
-            Debug.DrawLine(Vector3.forward * selectionY + Vector3.right * selectionX,
-                           Vector3.forward * (selectionY + 1) + Vector3.right * (selectionX + 1));
+            //Debug.DrawLine(Vector3.forward * selectionY + Vector3.right * selectionX,Vector3.forward * (selectionY + 1) + Vector3.right * (selectionX + 1));
 
-            Debug.DrawLine(Vector3.forward * (selectionY + 1) + Vector3.right * selectionX,
-                           Vector3.forward * selectionY + Vector3.right * (selectionX + 1));
+            //Debug.DrawLine(Vector3.forward * (selectionY + 1) + Vector3.right * selectionX, Vector3.forward * selectionY + Vector3.right * (selectionX + 1));
         }
     }
 }
